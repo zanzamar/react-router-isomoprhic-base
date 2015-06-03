@@ -32,7 +32,7 @@ var app = module.exports = express();
 if ( process.env.NODE_ENV === 'development' ) {
 	require( '../webpack/server' );
 	var proxy = require( 'http-proxy' ).createProxyServer();
-	app.all( '/build/*', function ( req, res ) {
+	app.all( '/build/*', function( req, res ) {
 		proxy.web( req, res, {
 			target: config.webpack.contentBase
 		});
