@@ -8,18 +8,13 @@
 var React = require( 'react' ),
 	Router = require( 'react-router' ),
 	getRoutes = require( '../app/routes.js' ),
-	Path = require( 'path' );
+	Path = require( 'path' ),
+	HtmlDocument = require( './HtmlDocument' );
 
 var fetchData = require( '../app/utils/fetchData' );
 var cache = require( '../app/utils/cache' );
 
-var fs = require( 'fs' );
-var layoutHTML = fs.readFileSync( Path.join( __dirname, '../app/layout.html' ) ).toString();
-
-var renderApp = ( req, res, next, callback ) => {
-	var htmlRegex = /¡HTML!/;
-	var dataRegex = /¡DATA!/;
-
+function renderApp( req, res, next, callback ) {
 	var token = 'TODO-CHANGE-TOKEN';
 
 	var router = Router.create({
@@ -36,20 +31,26 @@ var renderApp = ( req, res, next, callback ) => {
 
 	router.run(( Handler, state ) => {
 		if ( state.routes[ 0 ].name === 'not-found' ) {
-			let html = React.renderToStaticMarkup( <Handler /> );
-			return callback({ notFound: true }, html );
+			callback( { notFound: true }, generateHtmlDocument( Handler ) );
 		} else {
 			fetchData( token, state ).then(( data ) => {
-				let clientData = { token, data: cache.clean( token ) };
-				let html = React.renderToString( <Handler data={data} /> );
-				let output = layoutHTML
-					.replace( htmlRegex, html )
-					.replace( dataRegex, JSON.stringify( clientData ) );
-				callback( null, output );
+				callback( null, generateHtmlDocument( Handler, token, data ) );
 			});
 		}
 	});
-};
+}
+
+function generateHtmlDocument( Handler, token, data ) {
+	let clientData = { token, data: cache.clean( token ) };
+	return '<!doctype html>' +
+		React.renderToString(
+			<HtmlDocument
+				title="Isomorphic Example"
+				componentHTML={ React.renderToString( <Handler data={data} /> )}
+				rehydrateData={ '__DATA__ = ' + JSON.stringify( clientData ) }
+			/>
+		);
+}
 
 module.exports = function( req, res, next ) {
 	renderApp( req, res, next, ( error, html ) => {
