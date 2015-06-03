@@ -6,5 +6,8 @@
 		"server/static",
 		"build/"
 	],
+	"watch": [
+		"server/"
+	],
 	"ext": "js jsx json"
 }
