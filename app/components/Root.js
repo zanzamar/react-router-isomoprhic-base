@@ -30,7 +30,7 @@ class Root extends React.Component {
 	}
 
 	static propTypes = {
-		loadingEvents: React.PropTypes.func,
+		loadingEvents: React.PropTypes.object,
 		data: React.PropTypes.object
 	};
 
