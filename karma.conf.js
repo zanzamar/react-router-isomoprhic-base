@@ -1,59 +1,59 @@
 module.exports = function(config) {
-  config.set({
+	config.set({
 
-    basePath: '',
+		basePath: '',
 
-    frameworks: ['mocha'],
+		frameworks: ['mocha'],
 
-    files: [
-      // need to figure out how to get webpack to take a glob w/o duplicating
-      // stuff everywhere
-      'app/__tests__/main.js'
-    ],
+		files: [
+			// need to figure out how to get webpack to take a glob w/o duplicating
+			// stuff everywhere
+			'app/__tests__/main.js'
+		],
 
-    exclude: [],
+		exclude: [],
 
-    preprocessors: {
-      'app/__tests__/main.js': ['webpack']
-    },
+		preprocessors: {
+			'app/__tests__/main.js': ['webpack']
+		},
 
-    webpack: {
-      cache: true,
-      module: {
-        loaders: [
-          {test: /\.js$/, loader: 'jsx-loader'}
-        ]
-      }
-    },
+		webpack: {
+			cache: true,
+			module: {
+				loaders: [
+					{test: /\.js$/, loader: 'jsx-loader'}
+				]
+			}
+		},
 
-    webpackServer: {
-      stats: {
-        colors: true
-      }
-    },
+		webpackServer: {
+			stats: {
+				colors: true
+			}
+		},
 
-    reporters: ['progress'],
+		reporters: ['progress'],
 
-    port: 9876,
+		port: 9876,
 
-    colors: true,
+		colors: true,
 
-    logLevel: config.LOG_INFO,
+		logLevel: config.LOG_INFO,
 
-    autoWatch: true,
+		autoWatch: true,
 
-    browsers: ['Chrome'],
+		browsers: ['Chrome'],
 
-    captureTimeout: 60000,
+		captureTimeout: 60000,
 
-    singleRun: false,
+		singleRun: false,
 
-    plugins: [
-      require("karma-mocha"),
-      require("karma-chrome-launcher"),
-      require("karma-firefox-launcher"),
-      require("karma-webpack")
-    ]
-  });
+		plugins: [
+			require("karma-mocha"),
+			require("karma-chrome-launcher"),
+			require("karma-firefox-launcher"),
+			require("karma-webpack")
+		]
+	});
 };
 

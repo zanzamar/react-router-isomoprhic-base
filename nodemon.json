@@ -1,0 +1,10 @@
+{
+	"verbose": true,
+	"ignore": [
+		".git",
+		"node_modules",
+		"server/static",
+		"build/"
+	],
+	"ext": "js jsx json"
+}

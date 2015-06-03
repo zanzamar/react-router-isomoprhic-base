@@ -1,20 +1,23 @@
-var path = require('path');
+var path = require( 'path' ),
+	webpack = require( 'webpack' );
 
 module.exports = {
-  entry: "./app/client",
+	entry: "./app/client",
 
-  output: {
-    filename: '[name].js',
-    chunkFilename: '[id].chunk.js',
-    path: path.join('public', 'js'),
-    publicPath: '/js/'
-  },
+	output: {
+		filename: '[name].js',
+		chunkFilename: '[id].chunk.js',
+		path: path.join('build', 'js'),
+		publicPath: '/js/'
+	},
 
-  module: {
-    loaders: [
-      { test: /\.js$/, loader: 'jsx-loader?harmony&insertPragma=React.DOM' },
-      { test: require.resolve('react'), loader: 'expose?React' }
-    ]
-  }
+	module: {
+		loaders: [
+			{
+				test: /\.(js|jsx)?$/,
+				loaders: [ 'babel' ],
+				exclude: /node_modules/
+			}
+		]
+	}
 };
-
