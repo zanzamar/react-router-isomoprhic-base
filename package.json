@@ -2,11 +2,12 @@
   "name": "react-router-isomoprhic-base",
   "version": "0.0.1",
   "license": "MIT",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/zanzamar/react-router-isomoprhic-base"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zanzamar/react-router-isomoprhic-base"
   },
   "scripts": {
+    "dev": "DEBUG=* node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint app server config",
     "start": "script/run"
@@ -19,6 +20,7 @@
     "config": "^1.13.0",
     "debug": "^2.2.0",
     "express": "^4.12.4",
+    "lodash": "^3.9.3",
     "node-jsx": "^0.13.3",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
@@ -35,6 +37,7 @@
     "eslint": "^0.22.1",
     "eslint-plugin-react": "^2.4.0",
     "expose-loader": "0.5.3",
+    "http-proxy": "^1.11.1",
     "karma": "^0.12.16",
     "karma-chrome-launcher": "^0.1.4",
     "karma-cli": "0.0.4",
@@ -42,6 +45,7 @@
     "karma-mocha": "^0.1.4",
     "karma-webpack": "^1.2.1",
     "mocha": "^1.20.1",
+    "react-hot-loader": "^1.2.7",
     "webpack-dev-server": "^1.4.6"
   }
 }
